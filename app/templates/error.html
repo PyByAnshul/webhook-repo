@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Error - GitHub Webhook Events{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>Oops! Something went wrong</h1>
+        <p>{{ error_message or "An unexpected error occurred" }}</p>
+    </div>
+    
+    <div class="error-container">
+        <div class="error-card">
+            <h2>Error {{ error_code or 500 }}</h2>
+            <p>{{ error_description or "We're sorry, but something went wrong on our end." }}</p>
+            <a href="{{ url_for('index') }}" class="btn-primary">Go Back Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-container {
+    padding: 40px;
+    text-align: center;
+}
+
+.error-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.error-card h2 {
+    color: #dc3545;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+</style>
+{% endblock %} 

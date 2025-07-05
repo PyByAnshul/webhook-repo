@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  webhook-app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/webhook_db
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    networks:
+      - webhook-network
+
+  mongo:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=webhook_db
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+    networks:
+      - webhook-network
+
+volumes:
+  mongo_data:
+
+networks:
+  webhook-network:
+    driver: bridge 
